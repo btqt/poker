@@ -28,9 +28,11 @@ public:
     void setRank(const Rank &rank);
     void setSuit(const Suit &suit);
 
-    Rank getRank() const;
-    Suit getSuit() const;
+    Rank rank() const;
+    Suit suit() const;
 
+    friend QDebug operator<<(QDebug dbg, const Card &c);
+    friend std::ostream &operator<<(std::ostream &out, const Card &c);
 signals:
 
 public slots:
@@ -39,6 +41,4 @@ private:
     Rank m_rank;
     Suit m_suit;
 };
-QDebug operator<<(QDebug dbg, const Card &c);
-std::ostream &operator<<(std::ostream &out, const Card &c);
 #endif // CARD_H
