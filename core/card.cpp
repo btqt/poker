@@ -4,6 +4,16 @@ Card::Card() : m_rank(Card::Ace), m_suit(Card::Heart) {}
 
 Card::Card(Rank rank, Suit suit) : m_rank(rank), m_suit(suit) {}
 
+bool Card::operator<(const Card &c)
+{
+    return m_rank < c.rank();
+}
+
+bool Card::operator>(const Card &c)
+{
+    return m_rank > c.rank();
+}
+
 void Card::setRank(const Rank &rank) {
     m_rank= rank;
 }
@@ -18,12 +28,12 @@ Card::Suit Card::suit() const {return m_suit;}
 
 QDebug operator<<(QDebug dbg, const Card &c)
 {
-    dbg.nospace() << QString("%1%2").arg(c.rank()).arg(c.suit());
-    return dbg.maybeSpace();
+    dbg.nospace() << QString("%1-%2").arg(c.rank()).arg(c.suit());
+    return dbg.nospace();
 }
 
 std::ostream &operator<<(std::ostream &out, const Card &c)
 {
-    out << c.rank() << c.suit();
+    out << c.rank() << "-" << c.suit();
     return out;
 }

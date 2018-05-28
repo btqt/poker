@@ -12,9 +12,17 @@ class PokerDeck : public Deck, public CardList
 {
 public:
     explicit PokerDeck();
-    virtual Card& deal() const;
-    virtual void shuffle();
+
+    virtual ~PokerDeck() override;
+
+    virtual Card_ptr deal() override;
+    virtual void shuffle() override;
+
+    virtual void add(Card_ptr c) override;
+
     void burn();
+
+    void sort();
 
     friend QDebug operator<<(QDebug dbg, const PokerDeck &c);
     friend std::ostream &operator<<(std::ostream &out, const PokerDeck &c);
@@ -22,5 +30,5 @@ private:
     void initialize();
 
 };
-
+typedef std::shared_ptr<PokerDeck> PokerDeck_ptr;
 #endif // POKERDECK_H

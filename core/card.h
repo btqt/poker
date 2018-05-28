@@ -4,13 +4,14 @@
 #include <QObject>
 #include <QMetaType>
 #include <QDebug>
+#include <memory>
 #include <ostream>
 
 using namespace std;
 class Card
 {
 public:
-    enum Rank {Ace = 0, Deuce, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King};
+    enum Rank {Ace = 1, Deuce, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King};
     enum Suit {Heart = 0, Diamond, Club, Spade};
 
     explicit Card();
@@ -24,6 +25,9 @@ public:
     Card(Card&& c) = default;
     Card& operator=(const Card &c) = default;
     Card& operator=(Card &&c) = default;
+
+    bool operator<(const Card &c);
+    bool operator>(const Card &c);
 
     void setRank(const Rank &rank);
     void setSuit(const Suit &suit);
@@ -41,4 +45,6 @@ private:
     Rank m_rank;
     Suit m_suit;
 };
+
+typedef std::shared_ptr<Card> Card_ptr;
 #endif // CARD_H
